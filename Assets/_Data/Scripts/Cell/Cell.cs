@@ -131,4 +131,9 @@ public class Cell : MonoBehaviour
             State = ECellState.UNSELECT;
         }
     }
+
+    public void SetPiece(BasePiece piece)
+    {
+        curPiece = piece;
+    }
 }

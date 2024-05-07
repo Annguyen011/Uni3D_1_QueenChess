@@ -151,32 +151,38 @@ public class ChessBoard : MonoBehaviour
             case EPieceName.BishopDark:
             case EPieceName.BishopLight:
                 PBishop pbishop1 = piece.GetComponent<PBishop>();
+                cells[i][j].SetPiece(pbishop1);
                 AddToPiece(pbishop1);
                 return;
             case EPieceName.KingDark:
             case EPieceName.KingLight:
                 PKing king = piece.GetComponent<PKing>();
+                cells[i][j].SetPiece(king);
                 AddToPiece(king);
                 return;
             case EPieceName.KnightDark:
             case EPieceName.KnightLight:
                 PKnight knight = piece.GetComponent<PKnight>();
+                cells[i][j].SetPiece(knight);
                 AddToPiece(knight);
                 return;
 
             case EPieceName.PawnLight:
             case EPieceName.PawnDark:
                 PPawn pawn = piece.GetComponent<PPawn>();
+                cells[i][j].SetPiece(pawn);
                 AddToPiece(pawn);
                 return;
             case EPieceName.QueenDark:
             case EPieceName.QueenLight:
                 PQueen queen = piece.GetComponent<PQueen>();
+                cells[i][j].SetPiece(queen);
                 AddToPiece(queen);
                 return;
             case EPieceName.RookDark:
             case EPieceName.RookLight:
                 PRook rook = piece.GetComponent<PRook>();
+                cells[i][j].SetPiece(rook);
                 AddToPiece(rook);
                 return;
         }
