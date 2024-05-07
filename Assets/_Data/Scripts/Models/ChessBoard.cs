@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -15,6 +16,8 @@ public class ChessBoard : MonoBehaviour
     [SerializeField] private Cell curHolderCell;
     [SerializeField] private Cell curSelectedCell;
 
+    [Header("# Piece infos")]
+    [SerializeField] private List<Transform> piecePrefabs;
 
     #endregion
 
@@ -67,7 +70,7 @@ public class ChessBoard : MonoBehaviour
     {
         cells = new Cell[8][];
 
-        GameObject parentOfCell = MakeParentForCell("Cells");
+        GameObject parentOfCell = MakeObjectHolder("Cells");
 
         for (int i = 0; i < 8; i++)
         {
@@ -101,7 +104,7 @@ public class ChessBoard : MonoBehaviour
     /// Tao ra cha cho cac object 
     /// </summary>
     /// <returns></returns>
-    private GameObject MakeParentForCell(string name)
+    private GameObject MakeObjectHolder(string name)
     {
         GameObject parentOfCell = new GameObject(name);
 

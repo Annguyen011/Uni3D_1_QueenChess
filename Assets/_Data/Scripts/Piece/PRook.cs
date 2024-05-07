@@ -1,13 +1,11 @@
 using UnityEngine;
 
 
-public abstract class BasePiece : MonoBehaviour
+public class PRook : BasePiece
 {
     #region [Elements]
 
-    [Header("# Spawn infos")]
-    public Vector3 offsetPosition;
-    public EPlayer player;
+
 
     #endregion
 
@@ -29,7 +27,8 @@ public abstract class BasePiece : MonoBehaviour
 
 
     #endregion
-
-    protected abstract void Move();
-
+    protected override void Move()
+    {
+        throw new System.NotImplementedException();
+    }
 }
