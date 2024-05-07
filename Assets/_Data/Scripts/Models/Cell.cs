@@ -34,6 +34,10 @@ public class Cell : MonoBehaviour
                     cellSelected.gameObject.SetActive(true);
                     cellHolder.gameObject.SetActive(false);
                     break;
+                case ECellState.UNSELECT:
+                    cellSelected.gameObject.SetActive(false);
+                    cellHolder.gameObject.SetActive(false);
+                    break;
                 case ECellState.TARGET:
                     break;
 
@@ -99,16 +103,16 @@ public class Cell : MonoBehaviour
         }
     }
     /// <summary>
-    /// Dat lai state cho cell
+    /// Dat lai stateWantChange cho cell
     /// </summary>
-    /// <param name="state"></param>
-    public void SetCellState(ECellState state)
+    /// <param name="stateWantChange"></param>
+    public void SetCellState(ECellState stateWantChange)
     {
-        if (state != ECellState.SELECT)
+        if (stateWantChange != ECellState.SELECT)
         {
             if (State != ECellState.SELECT)
             {
-                State = state;
+                State = stateWantChange;
             }
         }
 
@@ -122,6 +126,11 @@ public class Cell : MonoBehaviour
             {
                 State = ECellState.SELECT;
             }
+        }
+
+        if(stateWantChange == ECellState.UNSELECT)
+        {
+            State = ECellState.UNSELECT;
         }
     }
 }

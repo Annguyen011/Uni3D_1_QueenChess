@@ -8,12 +8,12 @@ public class ChessBoard : MonoBehaviour
     [Header("# Cell info")]
     [SerializeField] private LayerMask cellLayer;
     [SerializeField] private Vector3 basePos;
-    [SerializeField] private float paddingX = 1f;
-    [SerializeField] private float paddingZ = 1f;
+    [SerializeField] private float paddingOfCellX = 1f;
+    [SerializeField] private float paddingOfCellZ = 1f;
     [SerializeField] private Transform cellPrefab;
     [SerializeField] private Cell[][] cells;
-    [SerializeField] private Cell curCell;
-    public Cell[][] Cells => cells;
+    [SerializeField] private Cell curHolderCell;
+    [SerializeField] private Cell curSelectedCell;
 
 
     #endregion
@@ -48,20 +48,40 @@ public class ChessBoard : MonoBehaviour
     /// </summary>
     private void InitChessBoard()
     {
+        MakeCells();
+        MakePieces();
+    }
+
+    /// <summary>
+    /// Tao ra quan co va set vi tri cho no
+    /// </summary>
+    private void MakePieces()
+    {
+            
+    }
+
+    /// <summary>
+    /// Tao ra ban co
+    /// </summary>
+    private void MakeCells()
+    {
         cells = new Cell[8][];
+
+        GameObject parentOfCell = MakeParentForCell("Cells");
 
         for (int i = 0; i < 8; i++)
         {
             cells[i] = new Cell[8];
             for (int j = 0; j < 8; j++)
             {
-                GameObject newCell = Instantiate(cellPrefab, transform).gameObject;
+
+                GameObject newCell = Instantiate(cellPrefab, parentOfCell.transform).gameObject;
 
                 newCell.transform.SetLocalPositionAndRotation(Vector3.zero,
                     Quaternion.identity);
                 newCell.transform.SetPositionAndRotation(CaculatePosition(i, j),
                     Quaternion.identity);
-                newCell.name = "Cell " + i + " x " + j;
+                newCell.name = i + " x " + j;
 
                 if ((i + j) % 2 == 0)
                 {
@@ -76,6 +96,23 @@ public class ChessBoard : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Tao ra cha cho cac object 
+    /// </summary>
+    /// <returns></returns>
+    private GameObject MakeParentForCell(string name)
+    {
+        GameObject parentOfCell = new GameObject(name);
+
+        parentOfCell.transform.SetLocalPositionAndRotation(Vector3.zero,
+            Quaternion.identity);
+        parentOfCell.transform.SetPositionAndRotation(transform.position,
+            Quaternion.identity);
+        parentOfCell.transform.SetParent(transform);
+        return parentOfCell;
+    }
+
     /// <summary>
     /// Tinh vi tri cua cell 
     /// </summary>
@@ -84,7 +121,7 @@ public class ChessBoard : MonoBehaviour
     /// <returns></returns>
     private Vector3 CaculatePosition(int i, int j)
     {
-        return basePos + new Vector3(i * paddingX, 0, j * paddingZ);
+        return basePos + new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
     }
     /// <summary>
     /// Kiem tra input cua chuot
@@ -104,31 +141,31 @@ public class ChessBoard : MonoBehaviour
             Cell cell = hit.collider.GetComponent<Cell>();
 
             // Neu cell khac cell hien co
-            if (cell != curCell)
+            if (cell != curHolderCell)
             {
                 // Cho cell hien co ve trang thai binh thuong
                 // neu cell hien co khac null
-                if (curCell)
+                if (curHolderCell)
                 {
-                    curCell.SetCellState(ECellState.NORMAL);
+                    curHolderCell.SetCellState(ECellState.NORMAL);
                 }
 
                 // Set lai cell hien co
-                curCell = cell;
-                curCell.SetCellState(ECellState.HOLDER);
+                curHolderCell = cell;
+                curHolderCell.SetCellState(ECellState.HOLDER);
             }
         }
         else
         {
             // Neu khong target duoc cell thi chuyen cell hien
             // co thanh binh thuong va tra lai null
-            if (!curCell)
+            if (!curHolderCell)
             {
                 return;
             }
 
-            curCell.SetCellState(ECellState.NORMAL);
-            curCell = null;
+            curHolderCell.SetCellState(ECellState.NORMAL);
+            curHolderCell = null;
         }
 
         MouseDownHandler();
@@ -140,12 +177,18 @@ public class ChessBoard : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(!curCell)
+            if (!curHolderCell)
             {
                 return;
             }
 
-            curCell.SetCellState(ECellState.SELECT);
+            if (curSelectedCell != null)
+            {
+                curSelectedCell.SetCellState(ECellState.UNSELECT);
+            }
+
+            curSelectedCell = curHolderCell;
+            curSelectedCell.SetCellState(ECellState.SELECT);
         }
 
     }

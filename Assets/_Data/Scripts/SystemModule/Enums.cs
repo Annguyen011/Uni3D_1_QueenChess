@@ -9,7 +9,8 @@ public enum ECellState
     NORMAL,
     HOLDER,
     SELECT,
-    TARGET
+    UNSELECT,
+    TARGET,
 }
 
 public enum EGameState
