@@ -19,7 +19,6 @@ public class PKnight : BasePiece
     #region [Unity Methods]
 
 
-
     #endregion
 
     #region [Override]

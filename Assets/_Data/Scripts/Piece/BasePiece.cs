@@ -32,10 +32,4 @@ public abstract class BasePiece : MonoBehaviour
     #endregion
 
     protected abstract void Move();
-
-    public void SetOriginLocation(int x, int z)
-    {
-        originalLocation = new(x, z);
-        transform.position = originalLocation;
-    }
 }

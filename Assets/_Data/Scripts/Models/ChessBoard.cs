@@ -144,7 +144,7 @@ public class ChessBoard : MonoBehaviour
     {
         GameObject piece = Instantiate(piecePrefabs.Find(x => x.name == namePiecePrefab.ToString()).gameObject, parentOfPiece);
         piece.transform.position = cells[i][j].transform.position;
-        piece.name = piece.name + i + " X " + j;
+        piece.name = piece.name + " " + i + " X " + j;
 
         switch (namePiecePrefab)
         {

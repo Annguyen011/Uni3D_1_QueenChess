@@ -11,7 +11,6 @@ public class Cell : MonoBehaviour
     [SerializeField] private Transform cellSelected;
 
     [Header("# Color infos")]
-    [SerializeField] private ECellColor color;
     [SerializeField] private ECellState state;
     public ECellState State
     {
@@ -89,7 +88,6 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void SetColor(ECellColor color)
     {
-        this.color = color;
 
         switch (color)
         {
