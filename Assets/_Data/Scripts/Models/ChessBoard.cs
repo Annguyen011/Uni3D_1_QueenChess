@@ -69,19 +69,7 @@ public class ChessBoard : MonoBehaviour
             // Vòng lặp thứ hai để tạo quân cờ trên mỗi ô
             for (var j = 0; j < 8; j++)
             {
-                // Kiểm tra nếu ô đang ở hàng 1 hoặc 6, đó là hàng các quân bộ tốt (piece)
-                if (i == 1)
-                {
-                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnDark);
-
-                }
-                else if (i == 6)
-                {
-                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnLight);
-
-                }
-                // Kiểm tra nếu ô đang ở hàng 0 hoặc 7, đó là hàng các quân đặc biệt (rook, knight, bishop, queen, king)
-                else if (i == 0)
+                if (i == 0)
                 {
                     // Kiểm tra vị trí của ô để gán quân tương ứng
                     switch (j)
@@ -93,7 +81,6 @@ public class ChessBoard : MonoBehaviour
                         case 1:
                         case 6:
                             CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KnightDark); // Thêm quân xe (rook)
-                                                                                                // Thêm quân mã (knight)
                             break;
                         case 2:
                         case 5:
@@ -107,6 +94,17 @@ public class ChessBoard : MonoBehaviour
                             break;
                     }
                 }
+                // Kiểm tra nếu ô đang ở hàng 1 hoặc 6, đó là hàng các quân bộ tốt (piece)
+                else if (i == 1)
+                {
+                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnDark);
+                }
+                else if (i == 6)
+                {
+                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnLight);
+                }
+                // Kiểm tra nếu ô đang ở hàng 0 hoặc 7, đó là hàng các quân đặc biệt (rook, knight, bishop, queen, king)
+
                 else if (i == 7)
                 {
                     // Kiểm tra vị trí của ô để gán quân tương ứng
@@ -119,7 +117,6 @@ public class ChessBoard : MonoBehaviour
                         case 1:
                         case 6:
                             CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KnightLight); // Thêm quân xe (rook)
-                                                                                                 // Thêm quân mã (knight)
                             break;
                         case 2:
                         case 5:
@@ -132,11 +129,6 @@ public class ChessBoard : MonoBehaviour
                             CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KingLight); // Thêm quân vua (king)
                             break;
                     }
-                }
-                // Trường hợp còn lại, ô trống
-                else
-                {
-                    // Trường hợp khác, không có quân
                 }
             }
         }
@@ -153,36 +145,41 @@ public class ChessBoard : MonoBehaviour
         GameObject piece = Instantiate(piecePrefabs.Find(x => x.name == namePiecePrefab.ToString()).gameObject, parentOfPiece);
         piece.transform.position = cells[i][j].transform.position;
         piece.name = piece.name + i + " X " + j;
+
         switch (namePiecePrefab)
         {
             case EPieceName.BishopDark:
             case EPieceName.BishopLight:
-                PBishop pbishop = piece.GetComponent<PBishop>();
-                AddToPiece(pbishop);
-                break;
+                PBishop pbishop1 = piece.GetComponent<PBishop>();
+                AddToPiece(pbishop1);
+                return;
             case EPieceName.KingDark:
             case EPieceName.KingLight:
+                PKing king = piece.GetComponent<PKing>();
+                AddToPiece(king);
+                return;
+            case EPieceName.KnightDark:
+            case EPieceName.KnightLight:
                 PKnight knight = piece.GetComponent<PKnight>();
                 AddToPiece(knight);
-                break;
+                return;
+
             case EPieceName.PawnLight:
             case EPieceName.PawnDark:
                 PPawn pawn = piece.GetComponent<PPawn>();
                 AddToPiece(pawn);
-                break;
+                return;
             case EPieceName.QueenDark:
             case EPieceName.QueenLight:
                 PQueen queen = piece.GetComponent<PQueen>();
                 AddToPiece(queen);
-                break;
+                return;
             case EPieceName.RookDark:
             case EPieceName.RookLight:
                 PRook rook = piece.GetComponent<PRook>();
                 AddToPiece(rook);
-                break;
+                return;
         }
-
-
     }
 
     /// <summary>
@@ -259,6 +256,8 @@ public class ChessBoard : MonoBehaviour
         return basePos + new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
     }
     #endregion
+
+    #region [INPUT]
     /// <summary>
     /// Kiem tra input cua chuot
     /// </summary>
@@ -326,4 +325,6 @@ public class ChessBoard : MonoBehaviour
         }
 
     }
+
+    #endregion
 }
