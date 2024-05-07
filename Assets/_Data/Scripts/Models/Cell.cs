@@ -3,44 +3,28 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-	#region [Elements]
+    #region [Elements]
 
-	[Header("# Color infos")]
-	[SerializeField] private ECellColor color;
-	[SerializeField] private ECellState state;
+    [Header("# Color infos")]
+    [SerializeField] private ECellColor color;
+    [SerializeField] private ECellState state;
 
+    [Header("# Cell infos")]
+    public float size;
     #endregion
-
 
     #region [Components]
 
-
+    private Renderer ren;
 
     #endregion
 
     #region [Unity Methods]
 
-    private void Start()
+    private void Awake()
     {
-        SetColor();
-    }
-    /// <summary>
-    /// Set color when game start
-    /// </summary>
-    private void SetColor()
-    {
-        switch (color)
-        {
-            case ECellColor.BLACK:
-                gameObject.GetComponent<Renderer>().material = 
-                    ResourcesCtrl.Instance.blackMaterial;
-                break;
-
-            case ECellColor.WHITE:
-                gameObject.GetComponent<Renderer>().material = 
-                    ResourcesCtrl.Instance.whiteMaterial;
-                break;
-        }
+        ren = GetComponent<Renderer>();
+        size = ren.bounds.size.x;
     }
 
     #endregion
@@ -51,4 +35,22 @@ public class Cell : MonoBehaviour
 
     #endregion
 
+    /// <summary>
+    /// Set color when game start
+    /// </summary>
+    public void SetColor(ECellColor color)
+    {
+        this.color = color;
+
+        switch (color)
+        {
+            case ECellColor.BLACK:
+                ren.material = ResourcesCtrl.Instance.blackMaterial;
+                break;
+
+            case ECellColor.WHITE:
+                ren.material = ResourcesCtrl.Instance.whiteMaterial;
+                break;
+        }
+    }
 }
