@@ -7,7 +7,7 @@ public class Cell : MonoBehaviour
 
     [Header("# Settings")]
     [SerializeField] private Transform cellHolder;
-
+    [SerializeField] private BasePiece curPiece;
     [SerializeField] private Transform cellSelected;
 
     [Header("# Color infos")]

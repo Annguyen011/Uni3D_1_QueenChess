@@ -60,7 +60,9 @@ public class ChessBoard : MonoBehaviour
     /// </summary>
     private void MakePieces()
     {
-            
+        // Thuc hien sinh ra cac quan co o vi tri ban dau cho chung
+
+
     }
 
     /// <summary>
