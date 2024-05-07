@@ -395,6 +395,20 @@ MonoBehaviour:
   cellPrefab: {fileID: 4361536363633204620, guid: 90abbf6b8eb9f3d4b842aadbe876550c, type: 3}
   curHolderCell: {fileID: 0}
   curSelectedCell: {fileID: 0}
+  piecePrefabs:
+  - {fileID: 4207701621693582, guid: f005021ceced8b240983e71a3d481180, type: 3}
+  - {fileID: 4626390214331530, guid: 1c0f2faf14460a5478057fd4e0575576, type: 3}
+  - {fileID: 4200693306526636, guid: 309659d4eb727d74d91c4875a85edc00, type: 3}
+  - {fileID: 4239372230150158, guid: 27d2608cb94ae2d44811af52793c3562, type: 3}
+  - {fileID: 4071798522976028, guid: a007978aa14da3945b0f6655f65cc278, type: 3}
+  - {fileID: 4967576429096158, guid: 85ad2c556fdbd5747ac7f5f67f10e59b, type: 3}
+  - {fileID: 4933460620124638, guid: b1d95c04dd54e434aa65855a0f77d30f, type: 3}
+  - {fileID: 4010933918866702, guid: 391882f14be491c40962add653844907, type: 3}
+  - {fileID: 4213819079365966, guid: 664a4dc6e997f5f47a9233db911328ac, type: 3}
+  - {fileID: 4607164402640316, guid: be3573ba2ba53ea4f8979e64874c493d, type: 3}
+  - {fileID: 4684522381995130, guid: a72c2cd1520039b4084a4a33dfeccf7e, type: 3}
+  - {fileID: 4656301317612888, guid: f1fc282519e5c4a4daaa864f9c3d446f, type: 3}
+  pieces: []
 --- !u!1 &1253788978
 GameObject:
   m_ObjectHideFlags: 0

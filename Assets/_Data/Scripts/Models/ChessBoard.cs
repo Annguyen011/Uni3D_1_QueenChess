@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +18,7 @@ public class ChessBoard : MonoBehaviour
 
     [Header("# Piece infos")]
     [SerializeField] private List<Transform> piecePrefabs;
+    [SerializeField] private List<BasePiece> pieces;
 
     #endregion
 
@@ -60,9 +61,138 @@ public class ChessBoard : MonoBehaviour
     /// </summary>
     private void MakePieces()
     {
-        // Thuc hien sinh ra cac quan co o vi tri ban dau cho chung
+        // Tao object cha chua cac piece
+        Transform parentOfPiece = MakeObjectHolder("Pieces").transform;
+
+        for (var i = 0; i < 8; i++)
+        {
+            // Vòng lặp thứ hai để tạo quân cờ trên mỗi ô
+            for (var j = 0; j < 8; j++)
+            {
+                // Kiểm tra nếu ô đang ở hàng 1 hoặc 6, đó là hàng các quân bộ tốt (piece)
+                if (i == 1)
+                {
+                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnDark);
+
+                }
+                else if (i == 6)
+                {
+                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnLight);
+
+                }
+                // Kiểm tra nếu ô đang ở hàng 0 hoặc 7, đó là hàng các quân đặc biệt (rook, knight, bishop, queen, king)
+                else if (i == 0)
+                {
+                    // Kiểm tra vị trí của ô để gán quân tương ứng
+                    switch (j)
+                    {
+                        case 0:
+                        case 7:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.RookDark); // Thêm quân xe (rook)
+                            break;
+                        case 1:
+                        case 6:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KnightDark); // Thêm quân xe (rook)
+                                                                                                // Thêm quân mã (knight)
+                            break;
+                        case 2:
+                        case 5:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.BishopDark); // Thêm quân tượng (bishop)
+                            break;
+                        case 3:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.QueenDark); // Thêm quân hậu (queen)
+                            break;
+                        case 4:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KingDark); // Thêm quân vua (king)
+                            break;
+                    }
+                }
+                else if (i == 7)
+                {
+                    // Kiểm tra vị trí của ô để gán quân tương ứng
+                    switch (j)
+                    {
+                        case 0:
+                        case 7:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.RookLight); // Thêm quân xe (rook)
+                            break;
+                        case 1:
+                        case 6:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KnightLight); // Thêm quân xe (rook)
+                                                                                                 // Thêm quân mã (knight)
+                            break;
+                        case 2:
+                        case 5:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.BishopLight); // Thêm quân tượng (bishop)
+                            break;
+                        case 3:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.QueenLight); // Thêm quân hậu (queen)
+                            break;
+                        case 4:
+                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KingLight); // Thêm quân vua (king)
+                            break;
+                    }
+                }
+                // Trường hợp còn lại, ô trống
+                else
+                {
+                    // Trường hợp khác, không có quân
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Tao va gan cho cell tuong ung
+    /// </summary>
+    /// <param name="parentOfPiece"></param>
+    /// <param name="i"></param>
+    /// <param name="j"></param>
+    /// <param name="namePiecePrefab"></param>
+    private void CreatePieceForEachCell(Transform parentOfPiece, int i, int j, EPieceName namePiecePrefab)
+    {
+        GameObject piece = Instantiate(piecePrefabs.Find(x => x.name == namePiecePrefab.ToString()).gameObject, parentOfPiece);
+        piece.transform.position = cells[i][j].transform.position;
+        piece.name = piece.name + i + " X " + j;
+        switch (namePiecePrefab)
+        {
+            case EPieceName.BishopDark:
+            case EPieceName.BishopLight:
+                PBishop pbishop = piece.GetComponent<PBishop>();
+                AddToPiece(pbishop);
+                break;
+            case EPieceName.KingDark:
+            case EPieceName.KingLight:
+                PKnight knight = piece.GetComponent<PKnight>();
+                AddToPiece(knight);
+                break;
+            case EPieceName.PawnLight:
+            case EPieceName.PawnDark:
+                PPawn pawn = piece.GetComponent<PPawn>();
+                AddToPiece(pawn);
+                break;
+            case EPieceName.QueenDark:
+            case EPieceName.QueenLight:
+                PQueen queen = piece.GetComponent<PQueen>();
+                AddToPiece(queen);
+                break;
+            case EPieceName.RookDark:
+            case EPieceName.RookLight:
+                PRook rook = piece.GetComponent<PRook>();
+                AddToPiece(rook);
+                break;
+        }
 
 
+    }
+
+    /// <summary>
+    /// Them vao list piece
+    /// </summary>
+    /// <param name="classPiece"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void AddToPiece(BasePiece classPiece)
+    {
+        pieces.Add(classPiece);
     }
 
     /// <summary>
@@ -128,12 +258,11 @@ public class ChessBoard : MonoBehaviour
     {
         return basePos + new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
     }
+    #endregion
     /// <summary>
     /// Kiem tra input cua chuot
     /// </summary>
     /// 
-    #endregion
-
     private void CheclUserInput()
     {
         // Tao mot ray tu cam toi chuot

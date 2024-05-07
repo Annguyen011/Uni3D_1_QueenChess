@@ -6,8 +6,9 @@ public abstract class BasePiece : MonoBehaviour
     #region [Elements]
 
     [Header("# Spawn infos")]
-    public Vector3 offsetPosition;
-    public EPlayer player;
+    protected EPlayer player;
+    protected Vector2 location;
+    protected Vector2 originalLocation;
 
     #endregion
 
@@ -32,4 +33,9 @@ public abstract class BasePiece : MonoBehaviour
 
     protected abstract void Move();
 
+    public void SetOriginLocation(int x, int z)
+    {
+        originalLocation = new(x, z);
+        transform.position = originalLocation;
+    }
 }
