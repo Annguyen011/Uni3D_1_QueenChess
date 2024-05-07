@@ -42,12 +42,7 @@ public class ChessBoard : MonoBehaviour
 
     #endregion
 
-    #region [Override]
-
-
-
-    #endregion
-
+    #region [CREATE CELLS]
     /// <summary>
     /// Khoi tao ban co
     /// </summary>
@@ -66,7 +61,7 @@ public class ChessBoard : MonoBehaviour
                     Quaternion.identity);
                 newCell.transform.SetPositionAndRotation(CaculatePosition(i, j),
                     Quaternion.identity);
-                newCell.name = "Cell " + i+ " x " + j;
+                newCell.name = "Cell " + i + " x " + j;
 
                 if ((i + j) % 2 == 0)
                 {
@@ -94,27 +89,39 @@ public class ChessBoard : MonoBehaviour
     /// <summary>
     /// Kiem tra input cua chuot
     /// </summary>
+    /// 
+    #endregion
+
     private void CheclUserInput()
     {
+        // Tao mot ray tu cam toi chuot
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        // Neu tiep xuc voi cell
         if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
         {
+            // Get cell tu diem tiep xuc
             Cell cell = hit.collider.GetComponent<Cell>();
 
+            // Neu cell khac cell hien co
             if (cell != curCell)
             {
+                // Cho cell hien co ve trang thai binh thuong
+                // neu cell hien co khac null
                 if (curCell)
                 {
                     curCell.SetCellState(ECellState.NORMAL);
                 }
 
+                // Set lai cell hien co
                 curCell = cell;
                 curCell.SetCellState(ECellState.HOLDER);
             }
         }
         else
         {
+            // Neu khong target duoc cell thi chuyen cell hien
+            // co thanh binh thuong va tra lai null
             if (!curCell)
             {
                 return;
@@ -123,5 +130,23 @@ public class ChessBoard : MonoBehaviour
             curCell.SetCellState(ECellState.NORMAL);
             curCell = null;
         }
+
+        MouseDownHandler();
+    }
+    /// <summary>
+    /// Xu ly su kien click chuot
+    /// </summary>
+    private void MouseDownHandler()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(!curCell)
+            {
+                return;
+            }
+
+            curCell.SetCellState(ECellState.SELECT);
+        }
+
     }
 }

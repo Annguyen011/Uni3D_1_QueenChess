@@ -8,6 +8,8 @@ public class Cell : MonoBehaviour
     [Header("# Settings")]
     [SerializeField] private Transform cellHolder;
 
+    [SerializeField] private Transform cellSelected;
+
     [Header("# Color infos")]
     [SerializeField] private ECellColor color;
     [SerializeField] private ECellState state;
@@ -22,11 +24,15 @@ public class Cell : MonoBehaviour
             {
                 case ECellState.NORMAL:
                     cellHolder.gameObject.SetActive(false);
+                    cellSelected.gameObject.SetActive(false);
                     break;
                 case ECellState.HOLDER:
                     cellHolder.gameObject.SetActive(true);
+                    cellSelected.gameObject.SetActive(false);
                     break;
                 case ECellState.SELECT:
+                    cellSelected.gameObject.SetActive(true);
+                    cellHolder.gameObject.SetActive(false);
                     break;
                 case ECellState.TARGET:
                     break;
@@ -58,7 +64,10 @@ public class Cell : MonoBehaviour
     private void Start()
     {
         cellHolder = transform.Find("Holder");
+        cellSelected = transform.Find("Selected");
+
         cellHolder.gameObject.SetActive(false);
+        cellSelected.gameObject.SetActive(false);
 
         state = ECellState.NORMAL;
     }
@@ -89,9 +98,30 @@ public class Cell : MonoBehaviour
                 break;
         }
     }
-
+    /// <summary>
+    /// Dat lai state cho cell
+    /// </summary>
+    /// <param name="state"></param>
     public void SetCellState(ECellState state)
     {
-        State = state;
+        if (state != ECellState.SELECT)
+        {
+            if (State != ECellState.SELECT)
+            {
+                State = state;
+            }
+        }
+
+        else
+        {
+            if (State == ECellState.SELECT)
+            {
+                State = ECellState.HOLDER;
+            }
+            else
+            {
+                State = ECellState.SELECT;
+            }
+        }
     }
 }
