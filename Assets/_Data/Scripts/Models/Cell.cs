@@ -63,32 +63,6 @@ public class Cell : MonoBehaviour
         state = ECellState.NORMAL;
     }
 
-
-
-    private void OnMouseDown()
-    {
-        if (State != ECellState.SELECT)
-        {
-            State = ECellState.SELECT;
-        }
-    }
-
-    private void OnMouseEnter()
-    {
-        if (State != ECellState.SELECT)
-        {
-            State = ECellState.HOLDER;
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (State != ECellState.SELECT)
-        {
-            State = ECellState.NORMAL;
-        }
-    }
-
     #endregion
 
     #region [Override]
@@ -114,5 +88,10 @@ public class Cell : MonoBehaviour
                 ren.material = ResourcesCtrl.Instance.whiteMaterial;
                 break;
         }
+    }
+
+    public void SetCellState(ECellState state)
+    {
+        State = state;
     }
 }

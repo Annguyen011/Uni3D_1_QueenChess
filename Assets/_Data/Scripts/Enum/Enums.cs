@@ -11,3 +11,10 @@ public enum ECellState
     SELECT,
     TARGET
 }
+
+public enum EGameState
+{
+    GAMEOVER,
+    PLAYING,
+
+}
