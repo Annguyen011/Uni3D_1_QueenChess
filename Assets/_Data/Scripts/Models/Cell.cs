@@ -7,8 +7,6 @@ public class Cell : MonoBehaviour
 
 	[Header("# Color infos")]
 	[SerializeField] private ECellColor color;
-	[SerializeField] private Transform white;
-	[SerializeField] private Transform black;
 	[SerializeField] private ECellState state;
 
     #endregion
@@ -24,11 +22,7 @@ public class Cell : MonoBehaviour
 
     private void Start()
     {
-        white.gameObject.SetActive(false);
-        black.gameObject.SetActive(false);
-
         SetColor();
-
     }
     /// <summary>
     /// Set color when game start
@@ -38,11 +32,13 @@ public class Cell : MonoBehaviour
         switch (color)
         {
             case ECellColor.BLACK:
-                black.gameObject.SetActive(true);
+                gameObject.GetComponent<Renderer>().material = 
+                    ResourcesCtrl.Instance.blackMaterial;
                 break;
 
             case ECellColor.WHITE:
-                white.gameObject.SetActive(true);
+                gameObject.GetComponent<Renderer>().material = 
+                    ResourcesCtrl.Instance.whiteMaterial;
                 break;
         }
     }

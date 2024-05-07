@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -5,7 +6,8 @@ public class ResourcesCtrl : MonoBehaviour
 {
     #region [Elements]
 
-
+    public Material blackMaterial;
+    public Material whiteMaterial;
 
     #endregion
 
@@ -28,7 +30,10 @@ public class ResourcesCtrl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        LoadResources();
     }
+
 
     #endregion
 
@@ -38,4 +43,9 @@ public class ResourcesCtrl : MonoBehaviour
 
     #endregion
 
+    private void LoadResources()
+    {
+        blackMaterial = Resources.Load<Material>("Materials/Black");
+        whiteMaterial = Resources.Load<Material>("Materials/White");
+    }
 }

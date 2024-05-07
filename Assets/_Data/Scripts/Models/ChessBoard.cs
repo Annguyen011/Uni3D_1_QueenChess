@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class ChessBoard : MonoBehaviour
 {
-    #region [Elements]
-
-
+	#region [Elements]
+	[Header("# Cell info")]
+	[SerializeField] private Cell cellPrefab;
+	[SerializeField] private Cell[][] cells;
+	public Cell[][] Cells => cells;
+	
 
 	#endregion
 
@@ -28,4 +31,11 @@ public class ChessBoard : MonoBehaviour
 
 	#endregion
 
+	/// <summary>
+	/// Khoi tao ban co
+	/// </summary>
+	public void InitChessBoard()
+	{
+
+	}
 }
