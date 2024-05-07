@@ -5,9 +5,37 @@ public class Cell : MonoBehaviour
 {
     #region [Elements]
 
+    [Header("# Settings")]
+    [SerializeField] private Transform cellHolder;
+
     [Header("# Color infos")]
     [SerializeField] private ECellColor color;
     [SerializeField] private ECellState state;
+    public ECellState State
+    {
+        get { return state; }
+        set
+        {
+            state = value;
+
+            switch (state)
+            {
+                case ECellState.NORMAL:
+                    cellHolder.gameObject.SetActive(false);
+                    break;
+                case ECellState.HOLDER:
+                    cellHolder.gameObject.SetActive(true);
+                    break;
+                case ECellState.SELECT:
+                    break;
+                case ECellState.TARGET:
+                    break;
+
+            }
+        }
+    }
+
+
 
     [Header("# Cell infos")]
     public float size;
@@ -25,6 +53,40 @@ public class Cell : MonoBehaviour
     {
         ren = GetComponent<Renderer>();
         size = ren.bounds.size.x;
+    }
+
+    private void Start()
+    {
+        cellHolder = transform.Find("Holder");
+        cellHolder.gameObject.SetActive(false);
+
+        state = ECellState.NORMAL;
+    }
+
+
+
+    private void OnMouseDown()
+    {
+        if (State != ECellState.SELECT)
+        {
+            State = ECellState.SELECT;
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (State != ECellState.SELECT)
+        {
+            State = ECellState.HOLDER;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (State != ECellState.SELECT)
+        {
+            State = ECellState.NORMAL;
+        }
     }
 
     #endregion

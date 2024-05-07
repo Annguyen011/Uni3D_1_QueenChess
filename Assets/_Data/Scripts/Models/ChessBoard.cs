@@ -6,6 +6,7 @@ public class ChessBoard : MonoBehaviour
 {
     #region [Elements]
     [Header("# Cell info")]
+    [SerializeField] private Vector3 basePos;
     [SerializeField] private float paddingX = 1f;
     [SerializeField] private float paddingZ = 1f;
     [SerializeField] private Transform cellPrefab;
@@ -51,12 +52,12 @@ public class ChessBoard : MonoBehaviour
             {
                 GameObject newCell = Instantiate(cellPrefab, transform).gameObject;
 
-                newCell.transform.SetLocalPositionAndRotation(Vector3.zero, 
+                newCell.transform.SetLocalPositionAndRotation(Vector3.zero,
                     Quaternion.identity);
-                newCell.transform.SetPositionAndRotation(CaculatePosition(i, j), 
+                newCell.transform.SetPositionAndRotation(CaculatePosition(i, j),
                     Quaternion.identity);
 
-                if((i + j) % 2 == 0)
+                if ((i + j) % 2 == 0)
                 {
                     newCell.GetComponent<Cell>().SetColor(ECellColor.WHITE);
                 }
@@ -77,6 +78,6 @@ public class ChessBoard : MonoBehaviour
     /// <returns></returns>
     private Vector3 CaculatePosition(int i, int j)
     {
-        return new Vector3(i  * paddingX, 0, j  * paddingZ);
+        return basePos + new Vector3(i * paddingX, 0, j * paddingZ);
     }
 }

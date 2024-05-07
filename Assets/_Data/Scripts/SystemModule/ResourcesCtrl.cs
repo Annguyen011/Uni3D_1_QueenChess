@@ -8,6 +8,7 @@ public class ResourcesCtrl : MonoBehaviour
 
     public Material blackMaterial;
     public Material whiteMaterial;
+    public Material holderMaterial;
 
     #endregion
 
@@ -47,5 +48,6 @@ public class ResourcesCtrl : MonoBehaviour
     {
         blackMaterial = Resources.Load<Material>("Materials/Black");
         whiteMaterial = Resources.Load<Material>("Materials/White");
+        holderMaterial = Resources.Load<Material>("Materials/Holder");
     }
 }
