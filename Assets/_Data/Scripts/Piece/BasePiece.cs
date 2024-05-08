@@ -28,6 +28,14 @@ public abstract class BasePiece : MonoBehaviour
     // Phương thức di chuyển quân cờ, sẽ được ghi đè trong các lớp con
     public abstract void Move(Cell targetedCell);
 
+    public virtual void Attack(Cell targetedCell)
+    {
+        targetedCell.curPiece.BeAttackBy(this);
+        SetNewPosition(targetedCell);
+        BeUnselected();
+        GameManager.Instance.SwitchTurn();
+    }
+
     // Phương thức được gọi khi quân cờ được chọn, hiển thị các nước có thể đi
     public virtual void BeSelected()
     {
@@ -76,5 +84,11 @@ public abstract class BasePiece : MonoBehaviour
         pieceInfo.y = (int)newCell.location.y;
 
         transform.position = ChessBoard.instance.Cells[this.pieceInfo.x][this.pieceInfo.y].transform.position;
+    }
+
+    public virtual void BeAttackBy(BasePiece enemy)
+    {
+        Destroy(gameObject);
+        curCell.curPiece = null;
     }
 }

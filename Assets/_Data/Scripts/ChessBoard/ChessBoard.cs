@@ -322,56 +322,37 @@ public class ChessBoard : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
             {
                 Cell newCell = hit.collider.GetComponent<Cell>();
-
+               
+                
                 switch (newCell.State)
                 {
                     case ECellState.NORMAL:
+                        if (newCell.curPiece.player != GameManager.Instance.Player)
+                            return;
 
+                        if (curSelectedCell)
+                        {
+                            curSelectedCell.SetCellState(ECellState.NORMAL);
+                            if (curSelectedCell.curPiece)
+                            {
+                                curSelectedCell.curPiece.BeUnselected();
+                            }
+                        }
+
+                        curSelectedCell = newCell;
+                        curSelectedCell.SetCellState(ECellState.SELECT);
                         break;
 
                     case ECellState.TARGET:
-
+                        if (!newCell.curPiece)
+                        {
+                            curSelectedCell.MakeAMove(newCell);
+                        }
+                        else if (newCell.curPiece.player != GameManager.Instance.Player)
+                        {
+                            curSelectedCell.curPiece.Attack(newCell);
+                        }
                         break;
-                }
-
-
-                if (newCell.curPiece && newCell.curPiece.player == GameManager.Instance.Player)
-                {
-                    switch (newCell.State)
-                    {
-                        case ECellState.NORMAL:
-                            if (curSelectedCell)
-                            {
-                                curSelectedCell.SetCellState(ECellState.NORMAL);
-                                if (curSelectedCell.curPiece)
-                                {
-                                    curSelectedCell.curPiece.BeUnselected();
-                                }
-                            }
-
-                            curSelectedCell = newCell;
-                            curSelectedCell.SetCellState(ECellState.SELECT);
-                            break;
-
-                        case ECellState.SELECT:
-
-                            break;
-
-                        case ECellState.TARGET:
-                            // Neu la mot trong cac o duoc target
-                            // quan do la quan doi thu
-                            break;
-                    }
-
-                }
-
-                // Di chuyen quan co hien tai sang vi tri nay
-                else
-                {
-                    if (newCell.State == ECellState.TARGET && !newCell.curPiece)
-                    {
-                        curSelectedCell.MakeAMove(newCell);
-                    }
                 }
             }
         }

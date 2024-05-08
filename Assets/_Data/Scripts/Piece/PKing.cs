@@ -27,7 +27,6 @@ public class PKing : BasePiece
 
     public override void Move(Cell targetedCell)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void BeSelected()
@@ -37,12 +36,14 @@ public class PKing : BasePiece
 
     protected override void BeSlectedWhite()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void BeSlectedBlack()
     {
-        throw new System.NotImplementedException();
+    }
+
+    public override void Attack(Cell targetedCell)
+    {
     }
 
     #endregion
