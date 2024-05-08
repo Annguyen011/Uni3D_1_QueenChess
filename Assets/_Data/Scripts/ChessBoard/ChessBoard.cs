@@ -322,11 +322,20 @@ public class ChessBoard : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
             {
                 Cell newCell = hit.collider.GetComponent<Cell>();
-               
-                
+
+                if (!newCell)
+                {
+                    return;
+                }
+
                 switch (newCell.State)
                 {
                     case ECellState.NORMAL:
+                        
+                        if (!newCell.curPiece)
+                        {
+                            return;
+                        }
                         if (newCell.curPiece.player != GameManager.Instance.Player)
                             return;
 
