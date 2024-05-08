@@ -32,6 +32,9 @@ public class Cell : MonoBehaviour
                 case ECellState.SELECT:
                     cellSelected.gameObject.SetActive(true);
                     cellHolder.gameObject.SetActive(false);
+
+                    curPiece.BeSelected();
+
                     break;
                 case ECellState.UNSELECT:
                     cellSelected.gameObject.SetActive(false);
@@ -120,13 +123,17 @@ public class Cell : MonoBehaviour
             {
                 State = ECellState.HOLDER;
             }
-            else
+            else if (curPiece)
             {
                 State = ECellState.SELECT;
             }
+            else
+            {
+                State = ECellState.NORMAL;
+            }
         }
 
-        if(stateWantChange == ECellState.UNSELECT)
+        if (stateWantChange == ECellState.UNSELECT)
         {
             State = ECellState.UNSELECT;
         }

@@ -9,8 +9,6 @@ public abstract class BasePiece : MonoBehaviour
     [Header("# Spawn infos")]
     public PieceInfo pieceInfo;
     [SerializeField] protected EPlayer player;
-    [SerializeField] protected Vector2 location;
-    [SerializeField] protected Vector2 originalLocation;
 
     #endregion
 
@@ -37,10 +35,9 @@ public abstract class BasePiece : MonoBehaviour
     public void SetPieceInfo(PieceInfo pieceInfo)
     {
         this.pieceInfo = pieceInfo;
-        location = new(pieceInfo.x, pieceInfo.y);
     }
     protected abstract void Move();
-    protected virtual void BeSelected()
+    public virtual void BeSelected()
     {
         // Hien thi cac nuoc co the di chuyen
 

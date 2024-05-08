@@ -15,6 +15,7 @@ public class ChessBoard : MonoBehaviour
     [SerializeField] private Cell[][] cells;
     [SerializeField] private Cell curHolderCell;
     [SerializeField] private Cell curSelectedCell;
+    public Cell[][] Cells => cells;
 
     [Header("# Piece infos")]
     [SerializeField] private List<Transform> piecePrefabs;
@@ -25,11 +26,16 @@ public class ChessBoard : MonoBehaviour
 
     #region [Components]
 
-
+    public static ChessBoard instance;
 
     #endregion
 
     #region [Unity Methods]
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {

@@ -33,7 +33,7 @@ public class PQueen : BasePiece
         throw new System.NotImplementedException();
     }
 
-    protected override void BeSelected()
+    public override void BeSelected()
     {
         base.BeSelected();
     }
