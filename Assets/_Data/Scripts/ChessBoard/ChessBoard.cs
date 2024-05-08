@@ -338,7 +338,7 @@ public class ChessBoard : MonoBehaviour
                 // Di chuyen quan co hien tai sang vi tri nay
                 if (newCell.State == ECellState.TARGET)
                 {
-                    curSelectedCell.curPiece.Move();
+                    curSelectedCell.MakeAMove();
                 }
             }
         }

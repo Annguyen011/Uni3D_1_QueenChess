@@ -108,4 +108,11 @@ public class Cell : MonoBehaviour
     /// Lấy quân cờ trên ô
     /// </summary>
     public BasePiece GetPiece() => curPiece;
+
+    public void MakeAMove(Cell targetedCell)
+    {
+        curPiece.Move(targetedCell);
+        State = ECellState.NORMAL;
+        curPiece = null;
+    }
 }

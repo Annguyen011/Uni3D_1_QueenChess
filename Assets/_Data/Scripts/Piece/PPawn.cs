@@ -27,7 +27,7 @@ public class PPawn : BasePiece
 
 
 
-    public override void Move()
+    public override void Move(Cell targetedCell)
     {
         isFirstMoved = false;
 

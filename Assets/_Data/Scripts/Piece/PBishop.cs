@@ -25,7 +25,7 @@ public class PBishop : BasePiece
 
     #region [Override]
 
-    public override void Move()
+    public override void Move(Cell targetedCell)
     {
         throw new System.NotImplementedException();
     }

@@ -23,7 +23,7 @@ public abstract class BasePiece : MonoBehaviour
     }
 
     // Phương thức di chuyển quân cờ, sẽ được ghi đè trong các lớp con
-    public abstract void Move();
+    public abstract void Move(Cell targetedCell);
 
     // Phương thức được gọi khi quân cờ được chọn, hiển thị các nước có thể đi
     public virtual void BeSelected()
