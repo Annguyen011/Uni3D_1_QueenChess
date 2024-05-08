@@ -105,6 +105,12 @@ public abstract class BasePiece : MonoBehaviour
 
     public virtual void BeAttackBy(BasePiece enemy)
     {
+        if(gameObject.TryGetComponent<PKing>(out PKing _))
+        {
+            GameManager.Instance.GameOver();
+            return;
+        }
+
         Destroy(gameObject);
         curCell.curPiece = null;
     }
