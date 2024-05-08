@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PKnight : BasePiece
 {
+
     #region [Elements]
 
 
@@ -19,6 +20,7 @@ public class PKnight : BasePiece
     #region [Unity Methods]
 
 
+
     #endregion
 
     #region [Override]
@@ -27,6 +29,11 @@ public class PKnight : BasePiece
 
     #endregion
     protected override void Move()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void BeSelected()
     {
         throw new System.NotImplementedException();
     }

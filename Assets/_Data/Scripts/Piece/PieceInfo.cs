@@ -1,12 +1,11 @@
+using System;
 using UnityEngine;
+[Serializable]
 
-
-public class PieceInfo : MonoBehaviour
+public class PieceInfo 
 {
 	#region [Elements]
 
-	public string namePiece;
-	public string path;
 	public int x;
 	public int y;
 

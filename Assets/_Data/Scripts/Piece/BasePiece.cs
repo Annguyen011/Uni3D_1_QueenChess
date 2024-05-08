@@ -6,6 +6,7 @@ public abstract class BasePiece : MonoBehaviour
     #region [Elements]
 
     [Header("# Spawn infos")]
+    public PieceInfo pieceInfo;
     protected EPlayer player;
     protected Vector2 location;
     protected Vector2 originalLocation;
@@ -31,5 +32,12 @@ public abstract class BasePiece : MonoBehaviour
 
     #endregion
 
+
+    public void SetPieceInfo(PieceInfo pieceInfo)
+    {
+        this.pieceInfo = pieceInfo;
+    }
     protected abstract void Move();
+    protected abstract void BeSelected();
+
 }

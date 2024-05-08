@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PPawn : BasePiece
 {
+
     #region [Elements]
 
 
@@ -28,6 +29,11 @@ public class PPawn : BasePiece
 
     #endregion
     protected override void Move()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void BeSelected()
     {
         throw new System.NotImplementedException();
     }

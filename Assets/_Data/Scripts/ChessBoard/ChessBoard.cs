@@ -151,18 +151,34 @@ public class ChessBoard : MonoBehaviour
             case EPieceName.BishopDark:
             case EPieceName.BishopLight:
                 PBishop pbishop1 = piece.GetComponent<PBishop>();
+                pbishop1.SetPieceInfo(new PieceInfo
+                {
+                    x = i,
+                    y = j,
+                });
+
                 cells[i][j].SetPiece(pbishop1);
                 AddToPiece(pbishop1);
                 return;
             case EPieceName.KingDark:
             case EPieceName.KingLight:
                 PKing king = piece.GetComponent<PKing>();
+                king.SetPieceInfo(new PieceInfo
+                {
+                    x = i,
+                    y = j,
+                });
                 cells[i][j].SetPiece(king);
                 AddToPiece(king);
                 return;
             case EPieceName.KnightDark:
             case EPieceName.KnightLight:
                 PKnight knight = piece.GetComponent<PKnight>();
+                knight.SetPieceInfo(new PieceInfo
+                {
+                    x = i,
+                    y = j,
+                });
                 cells[i][j].SetPiece(knight);
                 AddToPiece(knight);
                 return;
@@ -170,18 +186,33 @@ public class ChessBoard : MonoBehaviour
             case EPieceName.PawnLight:
             case EPieceName.PawnDark:
                 PPawn pawn = piece.GetComponent<PPawn>();
+                pawn.SetPieceInfo(new PieceInfo
+                {
+                    x = i,
+                    y = j,
+                });
                 cells[i][j].SetPiece(pawn);
                 AddToPiece(pawn);
                 return;
             case EPieceName.QueenDark:
             case EPieceName.QueenLight:
                 PQueen queen = piece.GetComponent<PQueen>();
+                queen.SetPieceInfo(new PieceInfo
+                {
+                    x = i,
+                    y = j,
+                });
                 cells[i][j].SetPiece(queen);
                 AddToPiece(queen);
                 return;
             case EPieceName.RookDark:
             case EPieceName.RookLight:
                 PRook rook = piece.GetComponent<PRook>();
+                rook.SetPieceInfo(new PieceInfo
+                {
+                    x = i,
+                    y = j,
+                });
                 cells[i][j].SetPiece(rook);
                 AddToPiece(rook);
                 return;

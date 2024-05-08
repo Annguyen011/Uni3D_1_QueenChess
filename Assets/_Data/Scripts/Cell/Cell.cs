@@ -136,4 +136,6 @@ public class Cell : MonoBehaviour
     {
         curPiece = piece;
     }
+
+    public BasePiece GetPiece() => curPiece;
 }
