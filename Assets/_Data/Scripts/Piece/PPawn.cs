@@ -27,10 +27,11 @@ public class PPawn : BasePiece
 
 
 
-    #endregion
-    protected override void Move()
+    public override void Move()
     {
         isFirstMoved = false;
+
+
     }
 
     public override void BeSelected()
@@ -73,4 +74,7 @@ public class PPawn : BasePiece
     {
 
     }
+
+    #endregion
+
 }

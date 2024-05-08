@@ -25,10 +25,7 @@ public class PBishop : BasePiece
 
     #region [Override]
 
-
-
-    #endregion
-    protected override void Move()
+    public override void Move()
     {
         throw new System.NotImplementedException();
     }
@@ -47,4 +44,7 @@ public class PBishop : BasePiece
     {
         throw new System.NotImplementedException();
     }
+
+    #endregion
+
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PRook : BasePiece
 {
-    
+
     #region [Elements]
 
 
@@ -25,10 +25,7 @@ public class PRook : BasePiece
 
     #region [Override]
 
-
-
-    #endregion
-    protected override void Move()
+    public override void Move()
     {
         throw new System.NotImplementedException();
     }
@@ -47,4 +44,7 @@ public class PRook : BasePiece
     {
         throw new System.NotImplementedException();
     }
+
+    #endregion
+
 }

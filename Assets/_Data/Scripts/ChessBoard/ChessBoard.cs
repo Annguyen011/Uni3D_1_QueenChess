@@ -321,17 +321,25 @@ public class ChessBoard : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
             {
                 Cell newCell = hit.collider.GetComponent<Cell>();
-                
+
                 if (!newCell.curPiece)
                     return;
 
-                if (curSelectedCell)
+                if (newCell.State == ECellState.NORMAL)
                 {
-                    curSelectedCell.SetCellState(ECellState.NORMAL);
-                }
+                    if (curSelectedCell)
+                    {
+                        curSelectedCell.SetCellState(ECellState.NORMAL);
+                    }
 
-                curSelectedCell = hit.collider.GetComponent<Cell>();
-                curSelectedCell.SetCellState(ECellState.SELECT);
+                    curSelectedCell = hit.collider.GetComponent<Cell>();
+                    curSelectedCell.SetCellState(ECellState.SELECT);
+                }
+                // Di chuyen quan co hien tai sang vi tri nay
+                if (newCell.State == ECellState.TARGET)
+                {
+                    curSelectedCell.curPiece.Move();
+                }
             }
         }
 
