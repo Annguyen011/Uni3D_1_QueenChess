@@ -5,14 +5,15 @@ public class GameManager : MonoBehaviour
 {
     #region [Elements]
 
-	public EGameState GameState;
+    public EGameState GameState;
+    public EPlayer Player;
 
-	#endregion
+    #endregion
 
 
-	#region [Components]
+    #region [Components]
 
-	public static GameManager Instance;
+    public static GameManager Instance;
 
     #endregion
 
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Player = EPlayer.BLACK;
     }
 
     private void Start()
@@ -30,10 +32,16 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region [Override]
-
-
-
-    #endregion
-
+    public void SwitchTurn()
+    {
+        switch (Player)
+        {
+            case EPlayer.WHITE:
+                Player = EPlayer.BLACK;
+                break;
+            case EPlayer.BLACK:
+                Player = EPlayer.WHITE;
+                break;
+        }
+    }
 }

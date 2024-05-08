@@ -8,7 +8,7 @@ public abstract class BasePiece : MonoBehaviour
 
     [Header("# Spawn infos")]
     public PieceInfo pieceInfo; // Thông tin về quân cờ
-    [SerializeField] protected EPlayer player; // Người chơi sở hữu quân cờ
+    public EPlayer player; // Người chơi sở hữu quân cờ
 
     [Header("# Cell infos")]
     public Cell curCell;

@@ -323,29 +323,55 @@ public class ChessBoard : MonoBehaviour
             {
                 Cell newCell = hit.collider.GetComponent<Cell>();
 
-                if (newCell.curPiece)
+                switch (newCell.State)
                 {
+                    case ECellState.NORMAL:
 
-                    if (newCell.State == ECellState.NORMAL)
+                        break;
+
+                    case ECellState.TARGET:
+
+                        break;
+                }
+
+
+                if (newCell.curPiece && newCell.curPiece.player == GameManager.Instance.Player)
+                {
+                    switch (newCell.State)
                     {
-                        if (curSelectedCell)
-                        {
-                            curSelectedCell.SetCellState(ECellState.NORMAL);
-                            if (curSelectedCell.curPiece)
+                        case ECellState.NORMAL:
+                            if (curSelectedCell)
                             {
-                                curSelectedCell.curPiece.BeUnselected();
+                                curSelectedCell.SetCellState(ECellState.NORMAL);
+                                if (curSelectedCell.curPiece)
+                                {
+                                    curSelectedCell.curPiece.BeUnselected();
+                                }
                             }
-                        }
 
-                        curSelectedCell = newCell;
-                        curSelectedCell.SetCellState(ECellState.SELECT);
+                            curSelectedCell = newCell;
+                            curSelectedCell.SetCellState(ECellState.SELECT);
+                            break;
+
+                        case ECellState.SELECT:
+
+                            break;
+
+                        case ECellState.TARGET:
+                            // Neu la mot trong cac o duoc target
+                            // quan do la quan doi thu
+                            break;
                     }
+
                 }
 
                 // Di chuyen quan co hien tai sang vi tri nay
-                else if (newCell.State == ECellState.TARGET)
+                else
                 {
-                    curSelectedCell.MakeAMove(newCell);
+                    if (newCell.State == ECellState.TARGET && !newCell.curPiece)
+                    {
+                        curSelectedCell.MakeAMove(newCell);
+                    }
                 }
             }
         }

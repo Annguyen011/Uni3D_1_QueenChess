@@ -183,20 +183,20 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize: 42.63
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 1.38
+    m_NormalBias: 1.67
+    m_NearPlane: 6.2
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -223,7 +223,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 9.09, y: 2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -333,8 +333,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.24022801, y: 0, z: 0, w: 0.9707165}
-  m_LocalPosition: {x: 3.4, y: 4.8, z: -3.73}
+  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: 3.4, y: 7, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -388,11 +388,9 @@ MonoBehaviour:
   cellLayer:
     serializedVersion: 2
     m_Bits: 64
-  basePos: {x: 0, y: 0, z: 0}
   paddingOfCellX: 1
   paddingOfCellZ: 1
   cellPrefab: {fileID: 4361536363633204620, guid: 90abbf6b8eb9f3d4b842aadbe876550c, type: 3}
-  curHolderCell: {fileID: 0}
   curSelectedCell: {fileID: 0}
   piecePrefabs:
   - {fileID: 4207701621693582, guid: f005021ceced8b240983e71a3d481180, type: 3}
@@ -469,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameState: 1
+  Player: 0
 --- !u!1 &1719052235
 GameObject:
   m_ObjectHideFlags: 0
