@@ -25,20 +25,12 @@ public class Cell : MonoBehaviour
                     cellHolder.gameObject.SetActive(false);
                     cellSelected.gameObject.SetActive(false);
                     break;
-                case ECellState.HOLDER:
-                    cellHolder.gameObject.SetActive(true);
-                    cellSelected.gameObject.SetActive(false);
-                    break;
                 case ECellState.SELECT:
                     cellSelected.gameObject.SetActive(true);
                     cellHolder.gameObject.SetActive(false);
 
                     curPiece.BeSelected();
 
-                    break;
-                case ECellState.UNSELECT:
-                    cellSelected.gameObject.SetActive(false);
-                    cellHolder.gameObject.SetActive(false);
                     break;
                 case ECellState.TARGET:
                     cellSelected.gameObject.SetActive(false);
@@ -117,29 +109,12 @@ public class Cell : MonoBehaviour
             case ECellState.NORMAL:
                 this.State = stateWantChange;
                 break;
-            case ECellState.HOLDER:
-                if(State == ECellState.SELECT)
-                {
-                    return;
-                }
-
-                if(State == ECellState.TARGET)
-                {
-                    return;
-                }
-
-                State = stateWantChange;
-                break;
             case ECellState.SELECT:
                 if(!curPiece)
                 {
                     return;
                 }
                 State = stateWantChange;
-                break;
-            case ECellState.UNSELECT:
-                State = stateWantChange;
-
                 break;
             case ECellState.TARGET:
                 State = stateWantChange;

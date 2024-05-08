@@ -327,7 +327,7 @@ public class ChessBoard : MonoBehaviour
 
                 // Set lai cell hien co
                 curHolderCell = cell;
-                curHolderCell.SetCellState(ECellState.HOLDER);
+                curHolderCell.SetCellState(ECellState.NORMAL);
             }
         }
         else
@@ -359,7 +359,7 @@ public class ChessBoard : MonoBehaviour
 
             if (curSelectedCell != null)
             {
-                curSelectedCell.SetCellState(ECellState.UNSELECT);
+                curSelectedCell.SetCellState(ECellState.NORMAL);
             }
 
             curSelectedCell = curHolderCell;
