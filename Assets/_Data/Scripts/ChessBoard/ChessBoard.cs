@@ -12,7 +12,6 @@ public class ChessBoard : MonoBehaviour
     [SerializeField] private float paddingOfCellZ = 1f;
     [SerializeField] private Transform cellPrefab;
     [SerializeField] private Cell[][] cells;
-    [SerializeField] private Cell curHolderCell;
     [SerializeField] private Cell curSelectedCell;
     public Cell[][] Cells => cells;
 
@@ -295,7 +294,7 @@ public class ChessBoard : MonoBehaviour
     /// <returns></returns>
     private Vector3 CaculatePosition(int i, int j)
     {
-        return  new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
+        return new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
     }
     #endregion
 
@@ -306,43 +305,6 @@ public class ChessBoard : MonoBehaviour
     /// 
     private void CheclUserInput()
     {
-        // Tao mot ray tu cam toi chuot
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        // Neu tiep xuc voi cell
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
-        {
-            // Get cell tu diem tiep xuc
-            Cell cell = hit.collider.GetComponent<Cell>();
-
-            // Neu cell khac cell hien co
-            if (cell != curHolderCell)
-            {
-                // Cho cell hien co ve trang thai binh thuong
-                // neu cell hien co khac null
-                if (curHolderCell)
-                {
-                    curHolderCell.SetCellState(ECellState.NORMAL);
-                }
-
-                // Set lai cell hien co
-                curHolderCell = cell;
-                curHolderCell.SetCellState(ECellState.NORMAL);
-            }
-        }
-        else
-        {
-            // Neu khong target duoc cell thi chuyen cell hien
-            // co thanh binh thuong va tra lai null
-            if (!curHolderCell)
-            {
-                return;
-            }
-
-            curHolderCell.SetCellState(ECellState.NORMAL);
-            curHolderCell = null;
-        }
-
         MouseDownHandler();
     }
     /// <summary>
@@ -352,18 +314,15 @@ public class ChessBoard : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!curHolderCell)
-            {
-                return;
-            }
+            // Tao mot ray tu cam toi chuot
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (curSelectedCell != null)
+            // Neu tiep xuc voi cell
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
             {
-                curSelectedCell.SetCellState(ECellState.NORMAL);
+                curSelectedCell = hit.collider.GetComponent<Cell>();
+                curSelectedCell.SetCellState(ECellState.SELECT);
             }
-
-            curSelectedCell = curHolderCell;
-            curSelectedCell.SetCellState(ECellState.SELECT);
         }
 
     }

@@ -1,5 +1,4 @@
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class Cell : MonoBehaviour
         {
             state = value;
 
+            // Xác định hành động cần thực hiện dựa trên trạng thái của ô
             switch (state)
             {
                 case ECellState.NORMAL:
@@ -28,20 +28,15 @@ public class Cell : MonoBehaviour
                 case ECellState.SELECT:
                     cellSelected.gameObject.SetActive(true);
                     cellHolder.gameObject.SetActive(false);
-
-                    curPiece.BeSelected();
-
+                    curPiece.BeSelected(); // Gọi hàm BeSelected() từ curPiece
                     break;
                 case ECellState.TARGET:
                     cellSelected.gameObject.SetActive(false);
                     cellHolder.gameObject.SetActive(true);
                     break;
-
             }
         }
     }
-
-
 
     [Header("# Cell infos")]
     public float size;
@@ -69,99 +64,59 @@ public class Cell : MonoBehaviour
         cellHolder.gameObject.SetActive(false);
         cellSelected.gameObject.SetActive(false);
 
-        state = ECellState.NORMAL;
+        state = ECellState.NORMAL; // Khởi tạo trạng thái ban đầu là NORMAL
     }
 
     #endregion
 
     #region [Override]
 
-
-
     #endregion
 
     /// <summary>
-    /// Set color when game start
+    /// Thiết lập màu khi trò chơi bắt đầu
     /// </summary>
     public void SetColor(ECellColor color)
     {
-
         switch (color)
         {
             case ECellColor.BLACK:
                 ren.material = ResourcesCtrl.Instance.blackMaterial;
                 break;
-
             case ECellColor.WHITE:
                 ren.material = ResourcesCtrl.Instance.whiteMaterial;
                 break;
         }
     }
+
     /// <summary>
-    /// Dat lai stateWantChange cho cell
+    /// Đặt lại trạng thái cho ô
     /// </summary>
-    /// <param name="stateWantChange"></param>
     public void SetCellState(ECellState stateWantChange)
     {
-
         switch (stateWantChange)
         {
-            case ECellState.NORMAL:
-                this.State = stateWantChange;
-                break;
             case ECellState.SELECT:
-                if(!curPiece)
+                if (!curPiece) // Nếu không có quân cờ trên ô
                 {
                     return;
                 }
                 State = stateWantChange;
                 break;
+            case ECellState.NORMAL:
             case ECellState.TARGET:
                 State = stateWantChange;
                 break;
-
         }
-
-
-        //if (stateWantChange != ECellState.SELECT)
-        //{
-        //    if (State != ECellState.SELECT)
-        //    {
-        //        State = stateWantChange;
-        //    }
-        //}
-
-        //else
-        //{
-        //    if (State == ECellState.SELECT)
-        //    {
-        //        State = ECellState.HOLDER;
-        //    }
-        //    else if (curPiece)
-        //    {
-        //        State = ECellState.SELECT;
-        //    }
-        //    else
-        //    {
-        //        State = ECellState.NORMAL;
-        //    }
-        //}
-
-        //if (stateWantChange == ECellState.UNSELECT)
-        //{
-        //    State = ECellState.UNSELECT;
-        //}
-
-        //if(stateWantChange == ECellState.TARGET)
-        //{
-        //    State = ECellState.TARGET;
-        //}
     }
 
-    public void SetPiece(BasePiece piece)
-    {
-        curPiece = piece;
-    }
+    /// <summary>
+    /// Thiết lập quân cờ cho ô
+    /// </summary>
+    public void SetPiece(BasePiece piece) => curPiece = piece;
 
+    /// <summary>
+    /// Lấy quân cờ trên ô
+    /// </summary>
     public BasePiece GetPiece() => curPiece;
 }

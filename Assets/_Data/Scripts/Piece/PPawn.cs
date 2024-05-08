@@ -51,18 +51,18 @@ public class PPawn : BasePiece
         SetCellStateInBoard(pieceInfo.x, pieceInfo.y + 1, ECellState.TARGET);
 
 
-        // Xac dinh 2 o cheo co an duoc khong
-        if (pieceInfo.x > 0)
-        {
-            // Ben trai
-            SetCellStateInBoard(pieceInfo.x - 1, pieceInfo.y + 1, ECellState.TARGET);
+        //// Xac dinh 2 o cheo co an duoc khong
+        //if (pieceInfo.x > 0)
+        //{
+        //    // Ben trai
+        //    SetCellStateInBoard(pieceInfo.x - 1, pieceInfo.y + 1, ECellState.TARGET);
 
-        }
-        if (pieceInfo.y < 7 && pieceInfo.x < 7)
-        {
-            // Ben phai
-            SetCellStateInBoard(pieceInfo.x + 1, pieceInfo.y + 1, ECellState.TARGET);
-        }
+        //}
+        //if (pieceInfo.y < 7 && pieceInfo.x < 7)
+        //{
+        //    // Ben phai
+        //    SetCellStateInBoard(pieceInfo.x + 1, pieceInfo.y + 1, ECellState.TARGET);
+        //}
     }
 
     protected override void BeSlectedWhite()
