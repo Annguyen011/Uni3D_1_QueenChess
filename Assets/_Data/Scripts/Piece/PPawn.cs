@@ -35,6 +35,6 @@ public class PPawn : BasePiece
 
     protected override void BeSelected()
     {
-        throw new System.NotImplementedException();
+        // Hien thi cac nuoc co the di chuyen
     }
 }
