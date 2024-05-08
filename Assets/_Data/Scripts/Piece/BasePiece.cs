@@ -66,6 +66,9 @@ public abstract class BasePiece : MonoBehaviour
     /// <summary>
     /// Loai bo trang thai selected va target
     /// </summary>
-    public void BeUnselected() => targetCell.ForEach(item => 
+    public void BeUnselected() => targetCell.ForEach(item =>
     { item.SetCellState(ECellState.NORMAL); });
+
+    protected BasePiece CheckCellHasPiece(int x, int y) => 
+        ChessBoard.instance.Cells[x][y].curPiece;
 }

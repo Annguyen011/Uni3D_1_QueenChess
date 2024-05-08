@@ -52,13 +52,13 @@ public class PPawn : BasePiece
 
 
         // Xac dinh 2 o cheo co an duoc khong
-        if (pieceInfo.x > 0)
+        if (pieceInfo.x > 0 && CheckCellHasPiece(pieceInfo.x - 1, pieceInfo.y + 1))
         {
             // Ben trai
             AddCellOnCellTarget(pieceInfo.x - 1, pieceInfo.y + 1);
 
         }
-        if (pieceInfo.y < 7 && pieceInfo.x < 7)
+        if (pieceInfo.y < 7 && pieceInfo.x < 7 && CheckCellHasPiece(pieceInfo.x + 1, pieceInfo.y + 1))
         {
             // Ben phai
             AddCellOnCellTarget(pieceInfo.x + 1, pieceInfo.y + 1);
@@ -66,6 +66,8 @@ public class PPawn : BasePiece
 
         targetCell.ForEach(item => { item.SetCellState(ECellState.TARGET); });
     }
+
+   
 
     protected override void BeSlectedWhite()
     {
