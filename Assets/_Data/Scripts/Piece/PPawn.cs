@@ -6,7 +6,7 @@ public class PPawn : BasePiece
 
     #region [Elements]
 
-
+    [SerializeField] private bool isFirstMoved = true;
 
     #endregion
 
@@ -30,11 +30,21 @@ public class PPawn : BasePiece
     #endregion
     protected override void Move()
     {
-        throw new System.NotImplementedException();
+        isFirstMoved = false;
     }
 
     protected override void BeSelected()
     {
-        // Hien thi cac nuoc co the di chuyen
+       base.BeSelected();   
+    }
+
+
+    protected override void BeSlectedWhite()
+    {
+
+    }
+
+    protected override void BeSlectedBlack()
+    {
     }
 }

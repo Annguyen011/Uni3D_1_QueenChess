@@ -35,6 +35,16 @@ public class PQueen : BasePiece
 
     protected override void BeSelected()
     {
+        base.BeSelected();
+    }
+
+    protected override void BeSlectedWhite()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void BeSlectedBlack()
+    {
         throw new System.NotImplementedException();
     }
 }
