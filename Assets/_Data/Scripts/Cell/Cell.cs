@@ -41,6 +41,8 @@ public class Cell : MonoBehaviour
                     cellHolder.gameObject.SetActive(false);
                     break;
                 case ECellState.TARGET:
+                    cellSelected.gameObject.SetActive(false);
+                    cellHolder.gameObject.SetActive(true);
                     break;
 
             }
@@ -109,34 +111,76 @@ public class Cell : MonoBehaviour
     /// <param name="stateWantChange"></param>
     public void SetCellState(ECellState stateWantChange)
     {
-        if (stateWantChange != ECellState.SELECT)
+
+        switch (stateWantChange)
         {
-            if (State != ECellState.SELECT)
-            {
+            case ECellState.NORMAL:
+                this.State = stateWantChange;
+                break;
+            case ECellState.HOLDER:
+                if(State == ECellState.SELECT)
+                {
+                    return;
+                }
+
+                if(State == ECellState.TARGET)
+                {
+                    return;
+                }
+
                 State = stateWantChange;
-            }
+                break;
+            case ECellState.SELECT:
+                if(!curPiece)
+                {
+                    return;
+                }
+                State = stateWantChange;
+                break;
+            case ECellState.UNSELECT:
+                State = stateWantChange;
+
+                break;
+            case ECellState.TARGET:
+                State = stateWantChange;
+                break;
+
         }
 
-        else
-        {
-            if (State == ECellState.SELECT)
-            {
-                State = ECellState.HOLDER;
-            }
-            else if (curPiece)
-            {
-                State = ECellState.SELECT;
-            }
-            else
-            {
-                State = ECellState.NORMAL;
-            }
-        }
 
-        if (stateWantChange == ECellState.UNSELECT)
-        {
-            State = ECellState.UNSELECT;
-        }
+        //if (stateWantChange != ECellState.SELECT)
+        //{
+        //    if (State != ECellState.SELECT)
+        //    {
+        //        State = stateWantChange;
+        //    }
+        //}
+
+        //else
+        //{
+        //    if (State == ECellState.SELECT)
+        //    {
+        //        State = ECellState.HOLDER;
+        //    }
+        //    else if (curPiece)
+        //    {
+        //        State = ECellState.SELECT;
+        //    }
+        //    else
+        //    {
+        //        State = ECellState.NORMAL;
+        //    }
+        //}
+
+        //if (stateWantChange == ECellState.UNSELECT)
+        //{
+        //    State = ECellState.UNSELECT;
+        //}
+
+        //if(stateWantChange == ECellState.TARGET)
+        //{
+        //    State = ECellState.TARGET;
+        //}
     }
 
     public void SetPiece(BasePiece piece)
