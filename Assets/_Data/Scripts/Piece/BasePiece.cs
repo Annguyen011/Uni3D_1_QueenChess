@@ -58,7 +58,7 @@ public abstract class BasePiece : MonoBehaviour
 
     protected void AddCellOnCellTarget(int x, int y)
     {
-        targetCell.Add( ChessBoard.instance.Cells[x][y]);
+        targetCell.Add(ChessBoard.instance.Cells[x][y]);
     }
 
     protected abstract void BeSlectedWhite();
@@ -66,11 +66,6 @@ public abstract class BasePiece : MonoBehaviour
     /// <summary>
     /// Loai bo trang thai selected va target
     /// </summary>
-    public void BeUnselected()
-    {
-        foreach (var item in targetCell)
-        {
-            item.SetCellState(ECellState.NORMAL);
-        }
-    }
+    public void BeUnselected() => targetCell.ForEach(item => 
+    { item.SetCellState(ECellState.NORMAL); });
 }

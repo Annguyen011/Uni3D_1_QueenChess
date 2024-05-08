@@ -64,10 +64,7 @@ public class PPawn : BasePiece
             AddCellOnCellTarget(pieceInfo.x + 1, pieceInfo.y + 1);
         }
 
-        foreach (var item in targetCell)
-        {
-            item.SetCellState(ECellState.TARGET);
-        }
+        targetCell.ForEach(item => { item.SetCellState(ECellState.TARGET); });
     }
 
     protected override void BeSlectedWhite()
