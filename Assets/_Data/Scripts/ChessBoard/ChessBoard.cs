@@ -76,32 +76,32 @@ public class ChessBoard : MonoBehaviour
                     {
                         case 0:
                         case 7:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.RookDark); // Thêm quân xe (rook)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.RookDark); // Thêm quân xe (rook)
                             break;
                         case 1:
                         case 6:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KnightDark); // Thêm quân xe (rook)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.KnightDark); // Thêm quân xe (rook)
                             break;
                         case 2:
                         case 5:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.BishopDark); // Thêm quân tượng (bishop)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.BishopDark); // Thêm quân tượng (bishop)
                             break;
                         case 3:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.QueenDark); // Thêm quân hậu (queen)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.QueenDark); // Thêm quân hậu (queen)
                             break;
                         case 4:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KingDark); // Thêm quân vua (king)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.KingDark); // Thêm quân vua (king)
                             break;
                     }
                 }
                 // Kiểm tra nếu ô đang ở hàng 1 hoặc 6, đó là hàng các quân bộ tốt (piece)
                 else if (i == 1)
                 {
-                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnDark);
+                    SetupPieceOnCell(parentOfPiece, j, i, EPieceName.PawnDark);
                 }
                 else if (i == 6)
                 {
-                    CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.PawnLight);
+                    SetupPieceOnCell(parentOfPiece, j, i, EPieceName.PawnLight);
                 }
                 // Kiểm tra nếu ô đang ở hàng 0 hoặc 7, đó là hàng các quân đặc biệt (rook, knight, bishop, queen, king)
 
@@ -112,21 +112,21 @@ public class ChessBoard : MonoBehaviour
                     {
                         case 0:
                         case 7:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.RookLight); // Thêm quân xe (rook)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.RookLight); // Thêm quân xe (rook)
                             break;
                         case 1:
                         case 6:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KnightLight); // Thêm quân xe (rook)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.KnightLight); // Thêm quân xe (rook)
                             break;
                         case 2:
                         case 5:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.BishopLight); // Thêm quân tượng (bishop)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.BishopLight); // Thêm quân tượng (bishop)
                             break;
                         case 3:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.QueenLight); // Thêm quân hậu (queen)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.QueenLight); // Thêm quân hậu (queen)
                             break;
                         case 4:
-                            CreatePieceForEachCell(parentOfPiece, j, i, EPieceName.KingLight); // Thêm quân vua (king)
+                            SetupPieceOnCell(parentOfPiece, j, i, EPieceName.KingLight); // Thêm quân vua (king)
                             break;
                     }
                 }
@@ -140,7 +140,7 @@ public class ChessBoard : MonoBehaviour
     /// <param name="i"></param>
     /// <param name="j"></param>
     /// <param name="namePiecePrefab"></param>
-    private void CreatePieceForEachCell(Transform parentOfPiece, int i, int j, EPieceName namePiecePrefab)
+    private void SetupPieceOnCell(Transform parentOfPiece, int i, int j, EPieceName namePiecePrefab)
     {
         GameObject piece = Instantiate(piecePrefabs.Find(x => x.name == namePiecePrefab.ToString()).gameObject, parentOfPiece);
         piece.transform.position = cells[i][j].transform.position;
