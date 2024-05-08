@@ -25,9 +25,7 @@ public class PQueen : BasePiece
 
     #region [Override]
 
-    public override void Move(Cell targetedCell)
-    {
-    }
+    
 
     public override void BeSelected()
     {
@@ -39,10 +37,6 @@ public class PQueen : BasePiece
     }
 
     protected override void BeSlectedBlack()
-    {
-    }
-
-    public override void Attack(Cell targetedCell)
     {
     }
 

@@ -11,18 +11,6 @@ public class PPawn : BasePiece
     #endregion
 
 
-    #region [Components]
-
-
-
-    #endregion
-
-    #region [Unity Methods]
-
-
-
-    #endregion
-
     #region [Override]
 
 
@@ -31,11 +19,7 @@ public class PPawn : BasePiece
     {
         isFirstMoved = false;
 
-        SetNewPosition(targetedCell);
-
-        BeUnselected();
-
-        GameManager.Instance.SwitchTurn();
+        base.Move(targetedCell);
     }
 
     public override void BeSelected()
@@ -69,8 +53,6 @@ public class PPawn : BasePiece
             // Ben phai
             AddCellOnCellTarget(pieceInfo.x + 1, pieceInfo.y + 1);
         }
-
-        targetCell.ForEach(item => { item.SetCellState(ECellState.TARGET); });
     }
 
 
@@ -100,8 +82,6 @@ public class PPawn : BasePiece
             // Ben phai
             AddCellOnCellTarget(pieceInfo.x + 1, pieceInfo.y - 1);
         }
-
-        targetCell.ForEach(item => { item.SetCellState(ECellState.TARGET); });
     }
 
     public override void Attack(Cell targetedCell)

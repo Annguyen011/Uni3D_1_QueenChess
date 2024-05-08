@@ -26,7 +26,14 @@ public abstract class BasePiece : MonoBehaviour
     }
 
     // Phương thức di chuyển quân cờ, sẽ được ghi đè trong các lớp con
-    public abstract void Move(Cell targetedCell);
+    public virtual void Move(Cell targetedCell)
+    {
+        SetNewPosition(targetedCell);
+
+        BeUnselected();
+
+        GameManager.Instance.SwitchTurn();
+    }
 
     public virtual void Attack(Cell targetedCell)
     {
@@ -40,16 +47,18 @@ public abstract class BasePiece : MonoBehaviour
     // Phương thức được gọi khi quân cờ được chọn, hiển thị các nước có thể đi
     public virtual void BeSelected()
     {
-        // Hiển thị các ô mục tiêu cho quân cờ tương ứng với từng người chơi
-        switch (player)
-        {
-            case EPlayer.BLACK:
-                BeSlectedBlack();
-                break;
-            case EPlayer.WHITE:
-                BeSlectedWhite();
-                break;
-        }
+            // Hiển thị các ô mục tiêu cho quân cờ tương ứng với từng người chơi
+            switch (player)
+            {
+                case EPlayer.BLACK:
+                    BeSlectedBlack();
+                    break;
+                case EPlayer.WHITE:
+                    BeSlectedWhite();
+                    break;
+            }
+
+        targetCell.ForEach(item => { item.SetCellState(ECellState.TARGET); });
     }
 
     // Thêm một ô mục tiêu vào danh sách các ô mục tiêu

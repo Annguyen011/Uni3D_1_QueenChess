@@ -25,9 +25,6 @@ public class PKnight : BasePiece
 
     #region [Override]
 
-    public override void Move(Cell targetedCell)
-    {
-    }
 
     public override void BeSelected()
     {
@@ -42,9 +39,7 @@ public class PKnight : BasePiece
     {
     }
 
-    public override void Attack(Cell targetedCell)
-    {
-    }
+
 
     #endregion
 

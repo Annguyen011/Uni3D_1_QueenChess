@@ -25,10 +25,6 @@ public class PKing : BasePiece
 
     #region [Override]
 
-    public override void Move(Cell targetedCell)
-    {
-    }
-
     public override void BeSelected()
     {
         base.BeSelected();
@@ -42,9 +38,7 @@ public class PKing : BasePiece
     {
     }
 
-    public override void Attack(Cell targetedCell)
-    {
-    }
+
 
     #endregion
 

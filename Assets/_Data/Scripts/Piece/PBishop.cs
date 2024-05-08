@@ -25,9 +25,6 @@ public class PBishop : BasePiece
 
     #region [Override]
 
-    public override void Move(Cell targetedCell)
-    {
-    }
 
     public override void BeSelected()
     {
@@ -39,10 +36,6 @@ public class PBishop : BasePiece
     }
 
     protected override void BeSlectedBlack()
-    {
-    }
-
-    public override void Attack(Cell targetedCell)
     {
     }
 

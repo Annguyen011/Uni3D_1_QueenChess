@@ -40,8 +40,6 @@ public class Cell : MonoBehaviour
         }
     }
 
-    [Header("# Cell infos")]
-    public float size;
     #endregion
 
     #region [Components]
@@ -55,7 +53,6 @@ public class Cell : MonoBehaviour
     private void Awake()
     {
         ren = GetComponent<Renderer>();
-        size = ren.bounds.size.x;
     }
 
     private void Start()
