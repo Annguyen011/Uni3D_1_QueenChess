@@ -31,7 +31,9 @@ public class PPawn : BasePiece
     {
         isFirstMoved = false;
 
+        SetNewPosition(targetedCell);
 
+        BeUnselected();
     }
 
     public override void BeSelected()

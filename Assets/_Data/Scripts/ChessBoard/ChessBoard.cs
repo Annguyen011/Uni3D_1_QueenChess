@@ -50,7 +50,7 @@ public class ChessBoard : MonoBehaviour
 
     #endregion
 
-    #region [CREATE CELLS]
+    #region [CREATE BOARD]
     /// <summary>
     /// Khoi tao ban co
     /// </summary>
@@ -159,7 +159,7 @@ public class ChessBoard : MonoBehaviour
                 {
                     x = i,
                     y = j,
-                });
+                }, cells[i][j]);
 
                 cells[i][j].SetPiece(pbishop1);
                 AddToPiece(pbishop1);
@@ -171,7 +171,7 @@ public class ChessBoard : MonoBehaviour
                 {
                     x = i,
                     y = j,
-                });
+                }, cells[i][j]);
                 cells[i][j].SetPiece(king);
                 AddToPiece(king);
                 return;
@@ -182,7 +182,7 @@ public class ChessBoard : MonoBehaviour
                 {
                     x = i,
                     y = j,
-                });
+                }, cells[i][j]);
                 cells[i][j].SetPiece(knight);
                 AddToPiece(knight);
                 return;
@@ -194,7 +194,7 @@ public class ChessBoard : MonoBehaviour
                 {
                     x = i,
                     y = j,
-                });
+                }, cells[i][j]);
                 cells[i][j].SetPiece(pawn);
                 AddToPiece(pawn);
                 return;
@@ -205,7 +205,7 @@ public class ChessBoard : MonoBehaviour
                 {
                     x = i,
                     y = j,
-                });
+                }, cells[i][j]);
                 cells[i][j].SetPiece(queen);
                 AddToPiece(queen);
                 return;
@@ -216,7 +216,7 @@ public class ChessBoard : MonoBehaviour
                 {
                     x = i,
                     y = j,
-                });
+                }, cells[i][j]);
                 cells[i][j].SetPiece(rook);
                 AddToPiece(rook);
                 return;
@@ -254,6 +254,7 @@ public class ChessBoard : MonoBehaviour
                     Quaternion.identity);
                 newCell.transform.SetPositionAndRotation(CaculatePosition(i, j),
                     Quaternion.identity);
+                newCell.GetComponent<Cell>().location = new(i, j);
                 newCell.name = i + " x " + j;
 
                 if ((i + j) % 2 == 0)
@@ -322,23 +323,29 @@ public class ChessBoard : MonoBehaviour
             {
                 Cell newCell = hit.collider.GetComponent<Cell>();
 
-                if (!newCell.curPiece)
-                    return;
-
-                if (newCell.State == ECellState.NORMAL)
+                if (newCell.curPiece)
                 {
-                    if (curSelectedCell)
+
+                    if (newCell.State == ECellState.NORMAL)
                     {
-                        curSelectedCell.SetCellState(ECellState.NORMAL);
-                    }
+                        if (curSelectedCell)
+                        {
+                            curSelectedCell.SetCellState(ECellState.NORMAL);
+                            if (curSelectedCell.curPiece)
+                            {
+                                curSelectedCell.curPiece.BeUnselected();
+                            }
+                        }
 
-                    curSelectedCell = hit.collider.GetComponent<Cell>();
-                    curSelectedCell.SetCellState(ECellState.SELECT);
+                        curSelectedCell = newCell;
+                        curSelectedCell.SetCellState(ECellState.SELECT);
+                    }
                 }
+
                 // Di chuyen quan co hien tai sang vi tri nay
-                if (newCell.State == ECellState.TARGET)
+                else if (newCell.State == ECellState.TARGET)
                 {
-                    curSelectedCell.MakeAMove();
+                    curSelectedCell.MakeAMove(newCell);
                 }
             }
         }

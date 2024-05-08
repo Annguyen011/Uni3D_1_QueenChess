@@ -5,8 +5,8 @@ public class Cell : MonoBehaviour
     #region [Elements]
 
     [Header("# Settings")]
-    [SerializeField] private Transform cellHolder;
-    [SerializeField] public BasePiece curPiece;
+    public Vector2 location;
+    public BasePiece curPiece;
     [SerializeField] private Transform cellSelected;
 
     [Header("# Color infos")]
@@ -22,22 +22,19 @@ public class Cell : MonoBehaviour
             switch (state)
             {
                 case ECellState.NORMAL:
-                    cellHolder.gameObject.SetActive(false);
                     cellSelected.gameObject.SetActive(false);
 
-                    if(curPiece)
-                    {
-                        curPiece.BeUnselected();
-                    }
+                    //if(curPiece)
+                    //{
+                    //    curPiece.BeUnselected();
+                    //}
                     break;
                 case ECellState.SELECT:
                     cellSelected.gameObject.SetActive(true);
-                    cellHolder.gameObject.SetActive(false);
                     curPiece.BeSelected(); // Gọi hàm BeSelected() từ curPiece
                     break;
                 case ECellState.TARGET:
-                    cellSelected.gameObject.SetActive(false);
-                    cellHolder.gameObject.SetActive(true);
+                    cellSelected.gameObject.SetActive(true);
                     break;
             }
         }
@@ -63,10 +60,8 @@ public class Cell : MonoBehaviour
 
     private void Start()
     {
-        cellHolder = transform.Find("Holder");
         cellSelected = transform.Find("Selected");
 
-        cellHolder.gameObject.SetActive(false);
         cellSelected.gameObject.SetActive(false);
 
         state = ECellState.NORMAL; // Khởi tạo trạng thái ban đầu là NORMAL

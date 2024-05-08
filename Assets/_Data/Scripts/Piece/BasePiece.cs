@@ -11,15 +11,18 @@ public abstract class BasePiece : MonoBehaviour
     [SerializeField] protected EPlayer player; // Người chơi sở hữu quân cờ
 
     [Header("# Cell infos")]
+    public Cell curCell;
     [SerializeField] protected List<Cell> targetCell; // Danh sách các ô mục tiêu cho quân cờ
 
     #endregion
 
 
     // Thiết lập thông tin của quân cờ
-    public void SetPieceInfo(PieceInfo pieceInfo)
+    public void SetPieceInfo(PieceInfo pieceInfo, Cell cell)
     {
         this.pieceInfo = pieceInfo;
+
+        SetNewPosition(cell);
     }
 
     // Phương thức di chuyển quân cờ, sẽ được ghi đè trong các lớp con
@@ -53,10 +56,25 @@ public abstract class BasePiece : MonoBehaviour
     protected abstract void BeSlectedWhite();
 
     // Phương thức loại bỏ trạng thái chọn và mục tiêu của quân cờ
-    public void BeUnselected() => targetCell.ForEach(item =>
-    { item.SetCellState(ECellState.NORMAL); });
+    public void BeUnselected()
+    {
+        targetCell.ForEach(item =>
+            { item.SetCellState(ECellState.NORMAL); });
 
+        targetCell.Clear();
+    }
     // Kiểm tra xem ô đã được chọn có chứa quân cờ hay không
     protected BasePiece CheckCellHasPiece(int x, int y) =>
         ChessBoard.instance.Cells[x][y].curPiece;
+
+    protected void SetNewPosition(Cell newCell)
+    {
+        newCell.curPiece = this;
+        curCell = newCell;
+
+        pieceInfo.x = (int)newCell.location.x;
+        pieceInfo.y = (int)newCell.location.y;
+
+        transform.position = ChessBoard.instance.Cells[this.pieceInfo.x][this.pieceInfo.y].transform.position;
+    }
 }
