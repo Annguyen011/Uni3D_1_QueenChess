@@ -55,7 +55,7 @@ public class PPawn : BasePiece
         if (pieceInfo.x > 0)
         {
             // Ben trai
-            SetCellStateInBoard(x: pieceInfo.x - 1, y: pieceInfo.y + 1, state: ECellState.HOLDER);
+            SetCellStateInBoard(pieceInfo.x - 1, pieceInfo.y + 1, ECellState.HOLDER);
 
         }
         if (pieceInfo.y < 7 && pieceInfo.x < 7)
