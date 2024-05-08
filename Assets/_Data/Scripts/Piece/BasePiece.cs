@@ -13,7 +13,7 @@ public abstract class BasePiece : MonoBehaviour
     [Header("# Cell infos")]
     public Cell curCell;
     [SerializeField] protected List<Cell> targetCell; // Danh sách các ô mục tiêu cho quân cờ
-
+    protected int setPosCnt = 0;
     #endregion
 
 
@@ -31,6 +31,7 @@ public abstract class BasePiece : MonoBehaviour
     public virtual void Attack(Cell targetedCell)
     {
         targetedCell.curPiece.BeAttackBy(this);
+        curCell.SetCellState(ECellState.NORMAL);
         SetNewPosition(targetedCell);
         BeUnselected();
         GameManager.Instance.SwitchTurn();
@@ -77,6 +78,13 @@ public abstract class BasePiece : MonoBehaviour
 
     protected void SetNewPosition(Cell newCell)
     {
+        setPosCnt++;
+
+        if (setPosCnt > 1)
+        {
+            curCell.curPiece = null;
+        }
+
         newCell.curPiece = this;
         curCell = newCell;
 
