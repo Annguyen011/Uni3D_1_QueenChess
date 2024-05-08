@@ -8,7 +8,6 @@ public class ChessBoard : MonoBehaviour
     #region [Elements]
     [Header("# Cell info")]
     [SerializeField] private LayerMask cellLayer;
-    [SerializeField] private Vector3 basePos;
     [SerializeField] private float paddingOfCellX = 1f;
     [SerializeField] private float paddingOfCellZ = 1f;
     [SerializeField] private Transform cellPrefab;
@@ -296,7 +295,7 @@ public class ChessBoard : MonoBehaviour
     /// <returns></returns>
     private Vector3 CaculatePosition(int i, int j)
     {
-        return basePos + new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
+        return  new Vector3(i * paddingOfCellX, 0, j * paddingOfCellZ);
     }
     #endregion
 

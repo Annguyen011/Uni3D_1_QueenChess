@@ -52,6 +52,11 @@ public abstract class BasePiece : MonoBehaviour
         }
     }
 
+    protected void SetCellStateInBoard(int x, int y, ECellState state)
+    {
+        ChessBoard.instance.Cells[x][y].SetCellState(state);
+    }
+
     protected abstract void BeSlectedWhite();
     protected abstract void BeSlectedBlack();
 
