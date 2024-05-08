@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,6 +10,9 @@ public abstract class BasePiece : MonoBehaviour
     [Header("# Spawn infos")]
     public PieceInfo pieceInfo;
     [SerializeField] protected EPlayer player;
+
+    [Header("# Cell infos")]
+    [SerializeField] protected List<Cell> targetCell;
 
     #endregion
 
@@ -52,12 +56,21 @@ public abstract class BasePiece : MonoBehaviour
         }
     }
 
-    protected void SetCellStateInBoard(int x, int y, ECellState state)
+    protected void AddCellOnCellTarget(int x, int y)
     {
-        ChessBoard.instance.Cells[x][y].SetCellState(state);
+        targetCell.Add( ChessBoard.instance.Cells[x][y]);
     }
 
     protected abstract void BeSlectedWhite();
     protected abstract void BeSlectedBlack();
-
+    /// <summary>
+    /// Loai bo trang thai selected va target
+    /// </summary>
+    public void BeUnselected()
+    {
+        foreach (var item in targetCell)
+        {
+            item.SetCellState(ECellState.NORMAL);
+        }
+    }
 }

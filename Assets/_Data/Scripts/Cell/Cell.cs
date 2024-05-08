@@ -6,7 +6,7 @@ public class Cell : MonoBehaviour
 
     [Header("# Settings")]
     [SerializeField] private Transform cellHolder;
-    [SerializeField] private BasePiece curPiece;
+    [SerializeField] public BasePiece curPiece;
     [SerializeField] private Transform cellSelected;
 
     [Header("# Color infos")]
@@ -24,6 +24,11 @@ public class Cell : MonoBehaviour
                 case ECellState.NORMAL:
                     cellHolder.gameObject.SetActive(false);
                     cellSelected.gameObject.SetActive(false);
+
+                    if(curPiece)
+                    {
+                        curPiece.BeUnselected();
+                    }
                     break;
                 case ECellState.SELECT:
                     cellSelected.gameObject.SetActive(true);
@@ -92,23 +97,7 @@ public class Cell : MonoBehaviour
     /// <summary>
     /// Đặt lại trạng thái cho ô
     /// </summary>
-    public void SetCellState(ECellState stateWantChange)
-    {
-        switch (stateWantChange)
-        {
-            case ECellState.SELECT:
-                if (!curPiece) // Nếu không có quân cờ trên ô
-                {
-                    return;
-                }
-                State = stateWantChange;
-                break;
-            case ECellState.NORMAL:
-            case ECellState.TARGET:
-                State = stateWantChange;
-                break;
-        }
-    }
+    public void SetCellState(ECellState stateWantChange) => State = stateWantChange;
 
     /// <summary>
     /// Thiết lập quân cờ cho ô

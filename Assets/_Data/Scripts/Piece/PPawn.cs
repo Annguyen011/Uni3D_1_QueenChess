@@ -44,25 +44,30 @@ public class PPawn : BasePiece
         // Kha nang di chuyen 2 buoc khi moi bat dau
         if (isFirstMoved)
         {
-            SetCellStateInBoard(pieceInfo.x, pieceInfo.y + 2, ECellState.TARGET);
+            AddCellOnCellTarget(pieceInfo.x, pieceInfo.y + 2);
         }
 
         // Kha nang di chuyen 1 buoc
-        SetCellStateInBoard(pieceInfo.x, pieceInfo.y + 1, ECellState.TARGET);
+        AddCellOnCellTarget(pieceInfo.x, pieceInfo.y + 1);
 
 
-        //// Xac dinh 2 o cheo co an duoc khong
-        //if (pieceInfo.x > 0)
-        //{
-        //    // Ben trai
-        //    SetCellStateInBoard(pieceInfo.x - 1, pieceInfo.y + 1, ECellState.TARGET);
+        // Xac dinh 2 o cheo co an duoc khong
+        if (pieceInfo.x > 0)
+        {
+            // Ben trai
+            AddCellOnCellTarget(pieceInfo.x - 1, pieceInfo.y + 1);
 
-        //}
-        //if (pieceInfo.y < 7 && pieceInfo.x < 7)
-        //{
-        //    // Ben phai
-        //    SetCellStateInBoard(pieceInfo.x + 1, pieceInfo.y + 1, ECellState.TARGET);
-        //}
+        }
+        if (pieceInfo.y < 7 && pieceInfo.x < 7)
+        {
+            // Ben phai
+            AddCellOnCellTarget(pieceInfo.x + 1, pieceInfo.y + 1);
+        }
+
+        foreach (var item in targetCell)
+        {
+            item.SetCellState(ECellState.TARGET);
+        }
     }
 
     protected override void BeSlectedWhite()

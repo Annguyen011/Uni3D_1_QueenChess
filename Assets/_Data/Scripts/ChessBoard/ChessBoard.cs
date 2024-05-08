@@ -320,6 +320,16 @@ public class ChessBoard : MonoBehaviour
             // Neu tiep xuc voi cell
             if (Physics.Raycast(ray, out RaycastHit hit, 1000, cellLayer))
             {
+                Cell newCell = hit.collider.GetComponent<Cell>();
+                
+                if (!newCell.curPiece)
+                    return;
+
+                if (curSelectedCell)
+                {
+                    curSelectedCell.SetCellState(ECellState.NORMAL);
+                }
+
                 curSelectedCell = hit.collider.GetComponent<Cell>();
                 curSelectedCell.SetCellState(ECellState.SELECT);
             }
